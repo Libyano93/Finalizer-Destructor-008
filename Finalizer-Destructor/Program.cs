@@ -6,24 +6,22 @@ namespace Finalizer_Destructor
     {
         static void Main(string[] args)
         {
-            var p = new Person();
-            p.Name = "Younis Sultan";
+            MakeSomeGarbeg();
+            Console.WriteLine($"Memory Used Befor Collection {GC.GetTotalMemory(false):N0}"); //8,555,888
+            GC.Collect(); // Explicit Cleaning
+            Console.WriteLine($"Memory Used after Collection {GC.GetTotalMemory(true):N0}");
             Console.ReadKey();
         }
-    }
 
-    public class Person
-    {
-        public string Name { get; set; }
-
-        public Person()//Constructor
+        static void MakeSomeGarbeg()
         {
-            Console.WriteLine("This is Person Constructor");
-        }
-
-        ~Person()//Destructor
-        {
-            Console.WriteLine("This is Person Destructor");
+            Version v;
+            for (int i = 0; i < 1000; i++)
+            {
+                v = new Version();
+            }
         }
     }
+
+
 }
